@@ -1,0 +1,84 @@
+# formalization.yaml (v0.3): repo-root metadata for formalization projects.
+# Schema: https://github.com/mathlib-initiative/formalization.yaml
+
+version: "v0.3"
+
+project:
+  name: "jsp-000301-lean"
+  authors: ["xinkuangsi-spec"]
+  license: "Apache-2.0"
+
+sources:
+  - title: "Justin Sun Prize problem bank"
+    authors: ["TheJustinSunPrize"]
+    id: "https://github.com/TheJustinSunPrize/awards/tree/main/problems"
+    type: "problem database entry"
+  - title: "Golomb's counterexample (JSP-000301; consecutive powerful numbers)"
+    authors: ["Solomon W. Golomb"]
+    id: "https://www.erdosproblems.com/latex/365"
+    type: "problem database entry"
+
+status:
+  scope: >
+    Complete formalization of Golomb's 1970 counterexample: 12167 = 23^3
+    and 12168 = 2^3 * 3^2 * 13^2 are consecutive powerful numbers (every
+    prime divisor occurs with exponent at least two), and neither is a
+    perfect square since both lie strictly between 110^2 and 111^2.
+    Disproves the universal claim that consecutive powerful numbers must
+    include a perfect square.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+    - declaration: "jsp_000301_answer"
+      file: "Jsp000301/Basic.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+    - declaration: "exists_consecutive_powerful_not_square"
+      file: "Jsp000301/Basic.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      literature_dependencies: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["SWE-2 Max"]
+      framework: "Devin (Cognition)"
+      tool_setup: >
+        Proof produced by the Cognition Devin agent under the account
+        owner's direction: problem scoping, Lean authoring, local
+        `lake env lean` verification and axiom audit. The human account
+        owner directed the work and is the claimant of record.
+      cost:
+        wall_time: "not recorded"
+        spend_usd: "not recorded"
+        hardware: "local"
+      prompting_notes: ""
+  notes: >
+    AI-assisted formalization; AI assistance is disclosed in the
+    associated award-claim issue.
+
+fidelity:
+  divergences: ""
+
+review:
+  status: "author-verified"
+  reviewers: []
+  notes: >
+    Full `lake build` reproduced locally (v4.34.0 + Mathlib v4.34.0);
+    `#print axioms jsp_000301_answer` reports only
+    [propext, Classical.choice, Quot.sound].
+
+alignment:
+  namespace: "Jsp000301"
+  statements:
+    - source: "JSP-000301 catalog problem description"
+      lean: "jsp_000301_answer"
+      module: "Jsp000301/Basic.lean"
+      status: "proved"
+
+acknowledgements: >
+  Built on Mathlib; thanks to the Mathlib community and to
+  Thomas Bloom for erdosproblems.com.
